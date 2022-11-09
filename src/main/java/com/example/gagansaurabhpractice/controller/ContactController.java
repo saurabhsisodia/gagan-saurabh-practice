@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.gagansaurabhpractice.entity.Contact;
+import com.example.gagansaurabhpractice.model.Response;
 import com.example.gagansaurabhpractice.service.ContactService;
 
 @RestController
@@ -20,17 +21,17 @@ public class ContactController {
 	ContactService conService;
 	
 	@GetMapping("/contacts")
-	public List<Contact> getAllContacts(){
+	public Response getAllContacts(){
 		return conService.getContacts();
 	}
 	
 	@GetMapping("/contact/{id}")
-	public Contact getContact(@PathVariable("id") int id) {
+	public Response getContact(@PathVariable("id") int id) {
 		return conService.getContact(id);
 	}
 	
 	@PutMapping("/contact/{id}")
-	public Contact updateContact(@PathVariable("id") int id,@RequestBody Contact contact) {
+	public Response updateContact(@PathVariable("id") int id,@RequestBody Contact contact) {
 		return conService.updateContact(id,contact);
 	}
 }
