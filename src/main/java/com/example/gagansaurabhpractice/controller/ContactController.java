@@ -4,11 +4,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.gagansaurabhpractice.entity.Contact;
 import com.example.gagansaurabhpractice.model.Response;
@@ -19,7 +15,11 @@ public class ContactController {
 
 	@Autowired
 	ContactService conService;
-	
+
+	@PostMapping("/contact")
+	public Response createContact(@RequestBody Contact contact){
+		return conService.createContact(contact);
+	}
 	@GetMapping("/contacts")
 	public Response getAllContacts(){
 		return conService.getContacts();
@@ -33,5 +33,9 @@ public class ContactController {
 	@PutMapping("/contact/{id}")
 	public Response updateContact(@PathVariable("id") int id,@RequestBody Contact contact) {
 		return conService.updateContact(id,contact);
+	}
+	@DeleteMapping("/contact/{id}")
+	public Response deleteContact(@PathVariable("id") int id){
+		return conService.deleteContact(id);
 	}
 }
