@@ -3,6 +3,7 @@ package com.example.gagansaurabhpractice.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.gagansaurabhpractice.model.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,9 @@ public class ContactService {
 	@Autowired
 	ContactRepository contactRepo;
 
-	public Response createContact(Contact contact) {
+	public Response createContact(Request request) {
+		System.out.println(request.getTransaction_id());
+		Contact contact = new Contact(request.getFull_name(),request.getMobile_number(),request.getEmailid());
 		Contact createdContact = contactRepo.save(contact);
 		Response response = new Response();
 		List<Contact> contactList = new ArrayList<>();
